@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon index.js --exec babel-node --presets babel-preset-env"
+    "start:dev": "nodemon --exec  node --require @babel/register --require dotenv/config index.js",
+    "start": " npm run migrate && node --require @babel/register --require dotenv/config ./index.js",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "migrate:test": "NODE_ENV=test npm run migrate",
+    "undo:migrate": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -18,7 +22,21 @@
   },
   "homepage": "https://github.com/ericnyirimana/web-chat-backend#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "g": "^2.0.1",
+    "pg": "^7.17.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.3",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
