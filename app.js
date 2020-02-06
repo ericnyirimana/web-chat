@@ -4,7 +4,8 @@ import routes from './routes';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const app = express();
-app.listen(3400, () => console.log(`Server is listening on port 3400`));
+const PORT = process.env.PORT || 3400;
+app.listen(PORT, () => console.log(`Server is listening on port 3400`));
 app.use(
   bodyParser.urlencoded({
     limit: '500mb',
