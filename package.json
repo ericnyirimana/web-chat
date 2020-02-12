@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon --exec  node --require @babel/register --require dotenv/config index.js",
     "start": "npm run migrate && node --require @babel/register --require dotenv/config ./index.js",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
     "migrate:test": "NODE_ENV=test npm run migrate",
     "undo:migrate": "NODE_ENV=test sequelize db:migrate:undo:all",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+    "coveralls": "npm run pretest && jest --coverage && cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
+    "pretest": "npm run undo:migrate && npm run migrate:test"
   },
   "repository": {
     "type": "git",
