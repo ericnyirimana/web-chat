@@ -7,6 +7,10 @@ branches:
 cache:
   directories:
   - node_modules
+services:
+- postgresql
+before_script:
+- psql -c 'create database web_chat_test;' -U postgres
 before_install:
 - npm update
 install:

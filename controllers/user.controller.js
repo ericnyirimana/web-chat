@@ -1,19 +1,17 @@
 import Helper from '../helpers';
 import db from '../models';
 
-const { User } = db;
+const { Users } = db;
 
 class UserController {
   static async socialAuth(req, res) {
     let userExist = '';
     if (req.user.email) {
-      userExist = await Helper.findRecord(User, {
+      userExist = await Helper.findRecord(Users, {
         email: req.user.email
       });
     } else {
-      userExist = await Helper.findRecord(User, {
-        username: req.user.username
-      });
+      return res.status(400).send('Oops! Email need to be provided.');
     }
     if (userExist) {
       const { password } = req.user;
@@ -23,31 +21,26 @@ class UserController {
       }
       const token = Helper.generateToken(userExist.dataValues);
       return res.status(200).send({
-          status: res.statusCode,
+          status: 200,
           token
       })
     }
     const encryptedPassword = Helper.hashPassword(req.user.password);
-    const newUser = await User.create({
+    const newUser = await Users.create({
       firstName: req.user.firstName,
       lastName: req.user.lastName,
-      username: req.user.username,
       email: req.user.email,
       password: encryptedPassword,
       image: req.user.image
     });
-    if (newUser) {
       const token = Helper.generateToken(newUser.dataValues);
       return res.status(201).send({
-        status: res.statusCode,
+        status: 201,
         token,
         data: {
-          username: newUser.dataValues.username,
           email: newUser.dataValues.email
         }
       });
-    }
-    return res.status(500).send('INTERNAL SERVER ERROR');
   }
 }
 
