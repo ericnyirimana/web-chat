@@ -10,7 +10,9 @@
     "migrate:test": "NODE_ENV=test npm run migrate",
     "undo:migrate": "NODE_ENV=test sequelize db:migrate:undo:all",
     "coveralls": "npm run pretest && jest --coverage && cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
-    "pretest": "npm run undo:migrate && npm run migrate:test"
+    "pretest": "npm run undo:migrate && npm run migrate:test",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -30,27 +32,33 @@
     "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/register": "^7.8.3",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "g": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^7.17.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3",
-    "sequelize-cli": "^5.5.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0",
-    "nodemon": "^2.0.2"
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "jest": "^25.1.0"
   }
 }

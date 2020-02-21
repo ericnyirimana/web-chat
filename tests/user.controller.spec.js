@@ -1,5 +1,5 @@
 import UserController from '../controllers/user.controller';
-import { userMock } from '../__mocks__/user';
+import userMock from '../__mocks__/user';
 
 describe('UserController', () => {
   const res = {
@@ -10,10 +10,10 @@ describe('UserController', () => {
       return this;
     }
   };
-  beforeAll(done => {
-    done()
-  })
-  afterAll(done => {
+  beforeAll((done) => {
+    done();
+  });
+  afterAll((done) => {
     done();
   });
   it('Signup authentication', async () => {

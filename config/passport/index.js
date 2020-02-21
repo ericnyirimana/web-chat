@@ -6,6 +6,7 @@ class Strategy {
     this.facecookStrategy = passport.use(facebookStrategy);
     this.googleStrategy = passport.use(googleStrategy);
   }
+
   strategyTouse(strategy) {
     this.strategy = `${strategy}`;
     return this.strategy;

@@ -8,14 +8,17 @@ class Helper {
     });
     return Issuetoken;
   }
+
   static hashPassword(password) {
     const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
     return hashedPassword;
   }
+
   static comparePassword(passwordHash, password) {
     const comparedPassword = bcrypt.compareSync(password, passwordHash);
     return comparedPassword;
   }
+
   static async findRecord(model, search) {
     const existing = await model.findOne({ where: search });
     return existing;
