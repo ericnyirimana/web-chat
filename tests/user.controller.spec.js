@@ -10,12 +10,6 @@ describe('UserController', () => {
       return this;
     }
   };
-  beforeAll((done) => {
-    done();
-  });
-  afterAll((done) => {
-    done();
-  });
   it('Signup authentication', async () => {
     jest.spyOn(res, 'status');
     jest.spyOn(res, 'send');
