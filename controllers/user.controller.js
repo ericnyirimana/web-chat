@@ -15,17 +15,17 @@ class UserController {
     }
     if (userExist) {
       const { password } = req.user;
-      const isValidPassword = Helper.comparePassword(userExist.dataValues.password, password);
+      const isValidPassword = await Helper.comparePassword(userExist.dataValues.password, password);
       if (!isValidPassword) {
         return res.status(401).send('INVALID CREDENTIALS');
       }
-      const token = Helper.generateToken(userExist.dataValues);
+      const token = await Helper.generateToken(userExist.dataValues);
       return res.status(200).send({
         status: 200,
         token
       });
     }
-    const encryptedPassword = Helper.hashPassword(req.user.password);
+    const encryptedPassword = await Helper.hashPassword(req.user.password);
     const newUser = await Users.create({
       firstName: req.user.firstName,
       lastName: req.user.lastName,
@@ -33,7 +33,7 @@ class UserController {
       password: encryptedPassword,
       image: req.user.image
     });
-    const token = Helper.generateToken(newUser.dataValues);
+    const token = await Helper.generateToken(newUser.dataValues);
     return res.status(201).send({
       status: 201,
       token,
