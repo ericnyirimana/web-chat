@@ -16,14 +16,14 @@ class UserController {
     if (userExist) {
       const { password } = req.user;
       const isValidPassword = Helper.comparePassword(userExist.dataValues.password, password);
-      if(!isValidPassword){
+      if (!isValidPassword) {
         return res.status(401).send('INVALID CREDENTIALS');
       }
       const token = Helper.generateToken(userExist.dataValues);
       return res.status(200).send({
-          status: 200,
-          token
-      })
+        status: 200,
+        token
+      });
     }
     const encryptedPassword = Helper.hashPassword(req.user.password);
     const newUser = await Users.create({
@@ -33,14 +33,14 @@ class UserController {
       password: encryptedPassword,
       image: req.user.image
     });
-      const token = Helper.generateToken(newUser.dataValues);
-      return res.status(201).send({
-        status: 201,
-        token,
-        data: {
-          email: newUser.dataValues.email
-        }
-      });
+    const token = Helper.generateToken(newUser.dataValues);
+    return res.status(201).send({
+      status: 201,
+      token,
+      data: {
+        email: newUser.dataValues.email
+      }
+    });
   }
 }
 

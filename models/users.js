@@ -1,5 +1,5 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+
+const users = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     id: {
       type: DataTypes.INTEGER,
@@ -32,8 +32,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: true
     }
   }, {});
-  Users.associate = function(models) {
+  Users.associate = (models) => {
     // associations can be defined here
   };
   return Users;
 };
+
+export default users;

@@ -1,4 +1,4 @@
-export const userMock = {
+const userMock = {
   google: {
     user: {
       firstName: 'First',
@@ -35,3 +35,5 @@ export const userMock = {
     }
   }
 };
+
+export default userMock;
